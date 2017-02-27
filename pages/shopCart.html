@@ -1,0 +1,64 @@
+<div class="panel panel-info">
+    <div class="panel-heading">查看购物车</div>
+    <div class="panel-body" id="box3">
+        <p class="well" ng-show="cart.length==0">
+            购物车内暂时没有商品，登录后将显示您之前加入的商品<br>
+            <a href="#/productList">去购物<i>></i></a>
+        </p>
+
+        <table class="table table-striped" ng-show="cart.length>0">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>操作系统</th>
+                <th>出厂日期</th>
+                <th>购买数量</th>
+                <th>小计</th>
+                <th>预览</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--使用自定义过滤器:指定过滤器名称和参数. limitTo-->
+            <tr ng-repeat="item in cart">
+                <td>{{$index + 1}}</td>
+                <td>{{item.product.name}}</td>
+                <td>{{item.product.price | currency:"￥"}}</td>
+                <td>{{item.product.os | uppercase}}</td>
+                <td>{{item.product.date | date:"yyyy年MM月dd日 HH:mm:ss"}}</td>
+                <td>{{item.number}}</td>
+                <td>{{item.number * item.product.price | currency:"￥"}}</td>
+                <td class="piccart"><img ng-src="images/{{item.product.imgsrc}}"/></td>
+                <td>
+                    <button class="btn btn-link" ng-click="remove(item.product.name)">删除</button>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th></th>
+                <th>总计:</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>{{count()}}</th>
+                <th>{{money() | currency:"￥"}}</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<div class="like">猜你喜欢</div>
+<div class="shangping" ng-repeat="product in products">
+    <a href="#/detail?name={{product.name}}">
+    <div class="pic"><img ng-src="images/{{product.imgsrc2}}"/></div>
+    </a>
+    <p class="money">{{product.price | currency:"￥"}}</p>
+    <p>商品信息：{{product.name}}</p>
+    <p>操作系统：{{product.os | uppercase}}</p>
+    <div class="cart" ng-click="add(product)"><i class="fa fa-shopping-cart"></i>加入购物车</div>
+</div>

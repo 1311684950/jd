@@ -1,0 +1,15 @@
+<div ng-controller="productsCtrl">
+<div class="panel-body">
+    最低价格：<input type="number" class="jiage2" ng-model="range.minPrice">
+    最高价格：<input type="number" class="jiage2" ng-model="range.maxPrice">
+</div>
+<div class="shangping" ng-repeat="product in products | priceFilter:range.minPrice:range.maxPrice">
+    <a href="#/detail?name={{product.name}}">
+    <div class="pic"><img ng-src="images/{{product.imgsrc2}}"/></div>
+    </a>
+    <p class="money">{{product.price | currency:"￥"}}</p>
+    <p>商品信息：{{product.name}}</p>
+    <p>操作系统：{{product.os | uppercase}}</p>
+    <div class="cart" ng-click="add(product)"><i class="fa fa-shopping-cart"></i>加入购物车</div>
+</div>
+</div>
